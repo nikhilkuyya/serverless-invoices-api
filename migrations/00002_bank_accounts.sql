@@ -9,7 +9,19 @@ CREATE TABLE IF NOT EXISTS bank_accounts (
   bank_ifsc_code VARCHAR(25) NOT NULL,
   bank_description VARCHAR(255),
   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT nick_name_account_number_notnull CHECK (
+    NOT (
+      (
+        account_nick_name IS NULL
+        OR account_nick_name = ''
+      )
+      AND (
+        bank_account_number IS NULL
+        OR bank_account_number = ''
+      )
+    )
+  )
 )
 -- +goose StatementEnd
 

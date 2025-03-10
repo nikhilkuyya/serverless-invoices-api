@@ -14,6 +14,7 @@ type BankAccount struct {
 type BankAccountStore interface {
 	CreateBankAccount(bankAccount *BankAccount) (*BankAccount,error)
 	GetBankAccountByID(id int64) (*BankAccount,error)
+	GetAllBankAccounts() (*[]BankAccount,error)
 }
 
 type PostgresBankAccountStore struct {
@@ -73,4 +74,30 @@ func (pg *PostgresBankAccountStore) GetBankAccountByID(id int64) (*BankAccount, 
 	}
 
 	return &bankAccount, nil
+}
+
+
+func (pg *PostgresBankAccountStore) GetAllBankAccounts() (*[]BankAccount,error) {
+	query := "SELECT id,account_nick_name, bank_name, bank_account_number, bank_ifsc_code, bank_description from bank_accounts LIMIT 10"
+
+	var bankAccounts []BankAccount;
+
+	rows, err := pg.db.Query(query);
+
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var bankAccount BankAccount
+		err = rows.Scan(&bankAccount.ID, &bankAccount.AccountNickName, &bankAccount.BankName,
+		&bankAccount.BankAccountNumber, &bankAccount.BankIfscCode, &bankAccount.BankDescription)
+		if err != nil {
+			return nil, err
+		}
+		bankAccounts = append(bankAccounts, bankAccount);
+	}
+
+	return &bankAccounts,nil
 }

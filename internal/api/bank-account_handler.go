@@ -65,3 +65,15 @@ func (handler *BankAccountHandler) HandleCreateBankAccount(w http.ResponseWriter
 	w.Header().Set("Content-Type","application/json")
 	json.NewEncoder(w).Encode(createdBankAccount)
 }
+
+func (handler *BankAccountHandler) HandleGetAllBankAccounts(w http.ResponseWriter,r *http.Request) {
+	bankAccounts, err := handler.bankAccountStore.GetAllBankAccounts();
+	if err != nil {
+		fmt.Println(err)
+		http.Error(w, "failed to get all bankAccounts",http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type","application/json")
+	json.NewEncoder(w).Encode(bankAccounts)
+
+}

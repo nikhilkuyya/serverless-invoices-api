@@ -16,6 +16,7 @@ import (
 type Application struct {
 	Logger *log.Logger
 	BankAccountHandler *api.BankAccountHandler
+	ClientHandler *api.ClientHandler
 	DB *sql.DB
 }
 
@@ -33,12 +34,15 @@ func NewApplication() (*Application, error) {
 	logger := log.New(os.Stdout,"invoice-app::",log.Ldate | log.Ltime)
 	// stores
 	bankAccountStore := store.NewPostgresBankAccountStore(pgDB)
+	clientStore := store.NewPostgresClientStore(pgDB)
 	// handlers
 	bankAccountHandler := api.NewBankAccountHandler(bankAccountStore)
+	clientHandler := api.NewClientHandler(clientStore)
 	// app
 	app := Application {
 		Logger: logger,
 		BankAccountHandler: bankAccountHandler,
+		ClientHandler: clientHandler,
 		DB: pgDB,
 	}
 	return &app,nil
