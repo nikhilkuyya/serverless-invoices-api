@@ -1,0 +1,17 @@
+version: '3.8'
+
+volumes:
+  postgres_data:
+services:
+  db:
+    container_name: invoicesDB
+    image: postgres:12.4-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: "postgres"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    restart: unless-stopped

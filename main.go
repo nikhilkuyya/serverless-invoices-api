@@ -19,6 +19,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	// when is lifecycle
+	defer appInstance.DB.Close()
 
 	handler := routes.SetupRoutes(appInstance);
 	server := http.Server{
