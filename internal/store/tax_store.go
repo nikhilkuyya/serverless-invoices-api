@@ -5,7 +5,7 @@ import "database/sql"
 type Tax struct {
 	Id int64 `json:"id"`
 	Label string `json:"label"`
-	TaxPercentage string `json:"tax_percentage"`
+	TaxPercentage int64 `json:"tax_percentage"`
 }
 
 type TaxStore interface {
@@ -26,13 +26,62 @@ func NewPostgresTaxStore(db *sql.DB) *PostgresTaxStore{
 }
 
 func (pg *PostgresTaxStore) CreateTax(tax *Tax) (*Tax,error) {
-	return nil, nil
+	tx, err := pg.db.Begin()
+	if err != nil {
+		return nil, err
+	}
+
+	const query = `INSERT INTO taxes(label, tax_percentage) VALUES ($1, $2) RETURNING id`
+
+	err = tx.QueryRow(query,&tax.Label, &tax.TaxPercentage).Scan(&tax.Id)
+
+	if err != nil {
+		return nil, err
+	}
+	err = tx.Commit()
+	if err != nil {
+		return nil, err
+	}
+	return tax, nil
 }
 
 func (pg *PostgresTaxStore) GetTaxByID(id  int64) (*Tax, error) {
-	return nil, nil
+	var tax = Tax{}
+	const query = `SELECT id, label, tax_percentage FROM taxes WHERE id = $1`;
+	err := pg.db.QueryRow(query,id).Scan(&tax.Id,&tax.Label, &tax.TaxPercentage);
+	if err == sql.ErrNoRows {
+		return nil, nil
+	}
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &tax, nil
 }
 
 func (pg *PostgresTaxStore) GetTaxes() (*[]Tax, error) {
-	return nil, nil
+	const query = `SELECT id, label, tax_percentage FROM taxes LIMIT 100`
+
+	rows, err := pg.db.Query(query)
+
+	if err != nil {
+		return nil, err
+	}
+
+	defer rows.Close()
+	var taxes []Tax
+
+	for rows.Next() {
+		var tax = Tax{}
+		err = rows.Scan(&tax.Id, &tax.Label, &tax.TaxPercentage)
+
+		if err != nil {
+			return nil, err
+		}
+
+		taxes = append(taxes,tax)
+	}
+
+	return &taxes, nil
 }

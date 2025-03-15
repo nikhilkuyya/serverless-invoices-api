@@ -1,13 +1,18 @@
 -- +goose Up
 -- +goose StatementBegin
-CREATE TABLE IF NOT EXISTS invoice_statuses (
-  id INT PRIMARY KEY,
-  name VARCHAR(20) UNIQUE NOT NULL
+CREATE TABLE IF NOT EXISTS invoice_statuses(
+  id BIGSERIAL PRIMARY KEY,
+  name VARCHAR(20) UNIQUE NOT NULL,
   label VARCHAR(50) NOT NULL
 );
 
-INSERT INTO invoice_statuses (id, name, label)
-VALUES (1, 'draft','Draft'), (2, 'booked','Booked'), (3, 'sent','Sent'),  (4,'paid','Paid'), (5, 'cancelled','Cancelled'), (6, 'archieved','Archieved');
+INSERT INTO invoice_statuses (name, label)
+VALUES ('draft','Draft'),
+       ('booked','Booked'),
+       ('sent','Sent'),
+       ('paid','Paid'),
+       ('cancelled','Cancelled'),
+       ( 'archived','Archived');
 
 CREATE TABLE IF NOT EXISTS invoices(
   id BIGSERIAL PRIMARY KEY,

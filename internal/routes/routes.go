@@ -19,5 +19,9 @@ func SetupRoutes(app *app.Application) (*chi.Mux){
 	r.Get("/team/{id}",app.TeamHandler.HandleGetTeamByID)
 	r.Post("/team",app.TeamHandler.HandleCreateTeam)
 	r.Get("/team",app.TeamHandler.HandleGetTeams)
+
+	r.Get("/tax/{id}",app.TaxHandler.HandleGetTaxByID)
+	r.Get("/tax", app.TaxHandler.HandleGetTaxes)
+	r.Post("/tax",app.TaxHandler.HandleCreateTax)
 	return r
 }
