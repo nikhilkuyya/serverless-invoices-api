@@ -1,6 +1,8 @@
 package api
 
 import (
+	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/nikhilkuyya/invoice-go-app/internal/store"
@@ -49,6 +51,11 @@ func NewInvoiceHandler(teamStore store.TeamStore, clientStore store.ClientStore,
 }
 
 func (invoiceHandler *InvoiceHandler) HandleCreateInovice(w http.ResponseWriter, r *http.Request) {
+	var createInvoice = CreateInvoice{}
+	json.NewDecoder(r.Body).Decode(&createInvoice);
+	fmt.Println(createInvoice);
+	w.Header().Set("Content-Type","application/json")
+	json.NewEncoder(w).Encode(createInvoice)
 }
 
 func (invoiceHandler *InvoiceHandler) HandleGetInvoice(w http.ResponseWriter, r *http.Request){

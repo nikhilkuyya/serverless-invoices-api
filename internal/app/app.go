@@ -19,6 +19,7 @@ type Application struct {
 	ClientHandler *api.ClientHandler
 	TeamHandler *api.TeamHandler
 	TaxHandler *api.TaxHandler
+	InvoiceHandler *api.InvoiceHandler
 	DB *sql.DB
 }
 
@@ -39,12 +40,14 @@ func NewApplication() (*Application, error) {
 	clientStore := store.NewPostgresClientStore(pgDB)
 	teamStore := store.NewPostgresTeamStore(pgDB)
 	taxStore := store.NewPostgresTaxStore(pgDB)
+	invoiceStore := store.NewPostgresInvoiceStore(pgDB)
 
 	// handlers
 	bankAccountHandler := api.NewBankAccountHandler(bankAccountStore)
 	clientHandler := api.NewClientHandler(clientStore)
 	teamHandler := api.NewTeamHandler(teamStore)
 	taxHandler := api.NewTaxHandler(taxStore)
+	invoicehandler := api.NewInvoiceHandler(teamStore,clientStore,taxStore,invoiceStore)
 
 	// app
 	app := Application {
@@ -53,6 +56,7 @@ func NewApplication() (*Application, error) {
 		ClientHandler: clientHandler,
 		TeamHandler: teamHandler,
 		TaxHandler: taxHandler,
+		InvoiceHandler: invoicehandler,
 		DB: pgDB,
 	}
 	return &app,nil

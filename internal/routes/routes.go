@@ -23,5 +23,7 @@ func SetupRoutes(app *app.Application) (*chi.Mux){
 	r.Get("/tax/{id}",app.TaxHandler.HandleGetTaxByID)
 	r.Get("/tax", app.TaxHandler.HandleGetTaxes)
 	r.Post("/tax",app.TaxHandler.HandleCreateTax)
+
+	r.Post("/invoice",app.InvoiceHandler.HandleCreateInovice)
 	return r
 }
