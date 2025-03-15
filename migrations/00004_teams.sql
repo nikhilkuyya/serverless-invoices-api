@@ -3,7 +3,7 @@
 CREATE TABLE IF NOT EXISTS teams(
   id BIGSERIAL PRIMARY KEY,
   company_name VARCHAR(255) NOT NULL,
-  company_gstin VARCHAR(255) NOT NULL,
+  company_gstin VARCHAR(255) UNIQUE NOT NULL,
   company_address VARCHAR(255) NOT NULL,
   company_postal_code VARCHAR(10) NOT NULL,
   company_city VARCHAR(150) NOT NULL,

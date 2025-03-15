@@ -17,6 +17,7 @@ type Application struct {
 	Logger *log.Logger
 	BankAccountHandler *api.BankAccountHandler
 	ClientHandler *api.ClientHandler
+	TeamHandler *api.TeamHandler
 	DB *sql.DB
 }
 
@@ -35,14 +36,19 @@ func NewApplication() (*Application, error) {
 	// stores
 	bankAccountStore := store.NewPostgresBankAccountStore(pgDB)
 	clientStore := store.NewPostgresClientStore(pgDB)
+	teamStore := store.NewPostgresTeamStore(pgDB)
+
 	// handlers
 	bankAccountHandler := api.NewBankAccountHandler(bankAccountStore)
 	clientHandler := api.NewClientHandler(clientStore)
+	teamHandler := api.NewTeamHandler(teamStore)
+
 	// app
 	app := Application {
 		Logger: logger,
 		BankAccountHandler: bankAccountHandler,
 		ClientHandler: clientHandler,
+		TeamHandler: teamHandler,
 		DB: pgDB,
 	}
 	return &app,nil

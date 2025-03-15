@@ -11,7 +11,7 @@ VALUES (1, 'draft'), (2, 'booked'), (3, 'sent'),  (4,'paid'), (5, 'cancelled'), 
 CREATE TABLE IF NOT EXISTS invoices(
   id BIGSERIAL PRIMARY KEY,
   -- TODO: user_id
-  number VARCHAR(50) NOT NULL,
+  number VARCHAR(50) UNIQUE NOT NULL,
   status_id INT REFERENCES invoice_statuses(id),
   issued_at DATE NOT NULL,
   due_at DATE,

@@ -15,5 +15,9 @@ func SetupRoutes(app *app.Application) (*chi.Mux){
 	r.Get("/client/{id}",app.ClientHandler.HandleGetClientByID)
 	r.Post("/client",app.ClientHandler.HandleCreateClient)
 	r.Get("/client/list",app.ClientHandler.HandleGetClients);
+
+	r.Get("/team/{id}",app.TeamHandler.HandleGetTeamByID)
+	r.Post("/team",app.TeamHandler.HandleCreateTeam)
+	r.Get("/team",app.TeamHandler.HandleGetTeams)
 	return r
 }
