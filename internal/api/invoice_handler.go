@@ -1,0 +1,58 @@
+package api
+
+import (
+	"net/http"
+
+	"github.com/nikhilkuyya/invoice-go-app/internal/store"
+)
+
+type CreateInvoice struct {
+	ID int `json:"id"`
+	Number string `json:"number"`
+	StatusId int `json:"status_id"`
+	TeamId int64 `json:"team_id"`
+	BankAccountId int64 `json:"bank_account_id"`
+	ClientId	int64 `json:"client_id"`
+	ConsigneeId int `json:"consignee_id"`
+	Notes string `json:"notes"`
+	Total int64 `json:"total"`
+	Rows []CreateInvoiceRow `json:"rows"`
+}
+
+type CreateInvoiceRow struct {
+	ID int64 `json:"id"`
+	SerialNumber int64 `json:"serial_no"`
+	Item string `json:"item"`
+	Description string `json:"description"`
+	HSNCode string `json:"hsn_code"`
+	Quantity string `json:"quantity"`
+	Price string `json:"price"`
+	Unit string `json:"unit"`
+	InvoiceRowOrder int `json:"invoice_row_order"`
+	InvoiceTaxes []int `json:"invoice_taxes"`
+}
+
+type InvoiceHandler struct {
+	teamStore store.TeamStore
+	clientStore store.ClientStore
+	taxStore store.TaxStore
+	invoiceStore store.InvoiceStore
+}
+
+func NewInvoiceHandler(teamStore store.TeamStore, clientStore store.ClientStore, taxStore store.TaxStore, invoiceStore store.InvoiceStore) *InvoiceHandler {
+	return &InvoiceHandler{
+		teamStore: teamStore,
+		clientStore: clientStore,
+		taxStore: taxStore,
+		invoiceStore: invoiceStore,
+	}
+}
+
+func (invoiceHandler *InvoiceHandler) HandleCreateInovice(w http.ResponseWriter, r *http.Request) {
+}
+
+func (invoiceHandler *InvoiceHandler) HandleGetInvoice(w http.ResponseWriter, r *http.Request){
+}
+
+func (invoiceHandler *InvoiceHandler) HandleInvoices(w http.ResponseWriter, r *http.Request){
+}

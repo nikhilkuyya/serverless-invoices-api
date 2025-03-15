@@ -3,10 +3,11 @@
 CREATE TABLE IF NOT EXISTS invoice_statuses (
   id INT PRIMARY KEY,
   name VARCHAR(20) UNIQUE NOT NULL
+  label VARCHAR(50) NOT NULL
 );
 
-INSERT INTO invoice_statuses (id, name)
-VALUES (1, 'draft'), (2, 'booked'), (3, 'sent'),  (4,'paid'), (5, 'cancelled'), (6, 'archieved');
+INSERT INTO invoice_statuses (id, name, label)
+VALUES (1, 'draft','Draft'), (2, 'booked','Booked'), (3, 'sent','Sent'),  (4,'paid','Paid'), (5, 'cancelled','Cancelled'), (6, 'archieved','Archieved');
 
 CREATE TABLE IF NOT EXISTS invoices(
   id BIGSERIAL PRIMARY KEY,
@@ -36,8 +37,8 @@ CREATE TABLE IF NOT EXISTS invoices(
   client_postal_code VARCHAR(10) NOT NULL,
   client_city VARCHAR(100) NOT NULL,
   client_state VARCHAR(100) NOT NULL,
-  company_country VARCHAR(100) NOT NULL,
-  company_email VARCHAR(255) NOT NULL,
+  client_country VARCHAR(100) NOT NULL,
+  client_email VARCHAR(255) NOT NULL,
   client_id BIGINT REFERENCES clients(id) ON DELETE CASCADE,
   consignee_name VARCHAR(255) NOT NULL,
   consignee_gstin VARCHAR(255) NOT NULL,

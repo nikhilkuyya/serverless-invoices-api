@@ -1,0 +1,79 @@
+{
+  "number": "INV-2024-001",
+  "status_id": 1,
+  "issued_at": "2024-01-20",
+  "due_at": "2024-02-20",
+  "late_fee": 2.5,
+  "currency": "INR",
+  "from_name": "Company Name",
+  "from_gstin": "29ABCDE1234F1Z5",
+  "from_address": "123 Business Street",
+  "from_postal_code": "560001",
+  "from_city": "Bangalore",
+  "from_state": "Karnataka",
+  "from_country": "India",
+  "from_email": "company@example.com",
+  "from_phone": "+91-9876543210",
+  "team_id": 1,
+  "bank_name": "HDFC Bank",
+  "bank_account_number": "12345678901",
+  "bank_ifsc_code": "HDFC0001234",
+  "client_name": "Client Company",
+  "client_gstin": "29XYZA1234B1Z5",
+  "client_address": "456 Client Street",
+  "client_postal_code": "560002",
+  "client_city": "Mumbai",
+  "client_state": "Maharashtra",
+  "company_country": "India",
+  "company_email": "client@example.com",
+  "client_id": 1,
+  "consignee_name": "Consignee Company",
+  "consignee_gstin": "29PQRS1234C1Z5",
+  "consignee_address": "789 Consignee Street",
+  "consignee_postal_code": "560003",
+  "consignee_city": "Delhi",
+  "consignee_state": "Delhi",
+  "consignee_country": "India",
+  "consignee_email": "consignee@example.com",
+  "consignee_id": 2,
+  "notes": "Payment due within 30 days",
+  "total": 264788,
+  "rows": [
+    {
+      "invoice_id": 1,
+      "serial_no": "SR001",
+      "item": "Laptop",
+      "description": "MacBook Pro 16-inch",
+      "hsn_code": "8471",
+      "quantity": 1,
+      "price": 199900,
+      "unit": "piece",
+      "invoice_row_order": 1,
+      "taxes": [
+        {
+          "invoice_row_id": 1,
+          "label": "VAT",
+          "tax_percentage": 6
+        }
+      ]
+    },
+    {
+      "invoice_id": 1,
+      "serial_no": "SR002",
+      "item": "Monitor",
+      "description": "27-inch 4K Display",
+      "hsn_code": "8528",
+      "quantity": 2,
+      "price": 49900,
+      "unit": "piece",
+      "invoice_row_order": 2,
+      "taxes": [
+        {
+          "invoice_row_id": 1,
+          "label": "VAT",
+          "tax_percentage": 6
+        }
+      ]
+    }
+  ]
+}
