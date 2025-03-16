@@ -48,7 +48,7 @@ func (pg *PostgresTaxStore) CreateTax(tax *Tax) (*Tax,error) {
 
 func (pg *PostgresTaxStore) GetTaxByID(id  int64) (*Tax, error) {
 	var tax = Tax{}
-	const query = `SELECT id,name, label, tax_percentage FROM taxes WHERE id = $1`;
+	const query = `SELECT id, name, label, tax_percentage FROM taxes WHERE id = $1`;
 	err := pg.db.QueryRow(query,id).Scan(&tax.Id, &tax.Name, &tax.Label, &tax.TaxPercentage);
 
 	if err == sql.ErrNoRows {

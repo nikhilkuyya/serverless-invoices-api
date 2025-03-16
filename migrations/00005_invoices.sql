@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS invoices(
   issued_at DATE NOT NULL,
   due_at DATE,
   late_fee NUMERIC(5,2),
-  currency VARCHAR(6),
+  currency VARCHAR(6) DEFAULT 'INR',
   from_name VARCHAR(255) NOT NULL,
   from_gstin VARCHAR(255) NOT NULL,
   from_address VARCHAR(255) NOT NULL,

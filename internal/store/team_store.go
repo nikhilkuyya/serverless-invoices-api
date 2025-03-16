@@ -15,7 +15,7 @@ type Team struct {
 	ContactEmail string `json:"contact_email"`
 	ContactPhone string `json:"contact_phone"`
 	Currency string `json:"currency"`
-	InvoiceDueDays int64 `json:"invoice_due_days"`
+	InvoiceDueDays int `json:"invoice_due_days"`
 	InvoiceLateFee int64 `json:"invoice_late_fee"`
 	LogoUrl string `json:"logo_url"`
 }

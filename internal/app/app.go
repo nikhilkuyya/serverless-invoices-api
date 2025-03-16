@@ -47,7 +47,7 @@ func NewApplication() (*Application, error) {
 	clientHandler := api.NewClientHandler(clientStore)
 	teamHandler := api.NewTeamHandler(teamStore)
 	taxHandler := api.NewTaxHandler(taxStore)
-	invoicehandler := api.NewInvoiceHandler(teamStore,clientStore,taxStore,invoiceStore)
+	invoicehandler := api.NewInvoiceHandler(teamStore,clientStore,taxStore,invoiceStore,bankAccountStore)
 
 	// app
 	app := Application {
