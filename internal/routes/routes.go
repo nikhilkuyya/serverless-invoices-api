@@ -25,5 +25,6 @@ func SetupRoutes(app *app.Application) (*chi.Mux){
 	r.Post("/tax",app.TaxHandler.HandleCreateTax)
 
 	r.Post("/invoice",app.InvoiceHandler.HandleCreateInovice)
+	r.Get("/invoice-status", app.InvoiceHandler.HandleInvoiceStatues)
 	return r
 }

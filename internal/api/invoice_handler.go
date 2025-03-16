@@ -27,8 +27,8 @@ type CreateInvoiceRow struct {
 	Item string `json:"item"`
 	Description string `json:"description"`
 	HSNCode string `json:"hsn_code"`
-	Quantity string `json:"quantity"`
-	Price string `json:"price"`
+	Quantity int64 `json:"quantity"`
+	Price int64 `json:"price"`
 	Unit string `json:"unit"`
 	InvoiceRowOrder int `json:"invoice_row_order"`
 	InvoiceTaxes []int `json:"invoice_taxes"`
@@ -58,8 +58,19 @@ func (invoiceHandler *InvoiceHandler) HandleCreateInovice(w http.ResponseWriter,
 	json.NewEncoder(w).Encode(createInvoice)
 }
 
-func (invoiceHandler *InvoiceHandler) HandleGetInvoice(w http.ResponseWriter, r *http.Request){
+func (invoiceHandler *InvoiceHandler) HandleGetInvoice(w http.ResponseWriter, r *http.Request) {
 }
 
-func (invoiceHandler *InvoiceHandler) HandleInvoices(w http.ResponseWriter, r *http.Request){
+func (invoiceHandler *InvoiceHandler) HandleInvoices(w http.ResponseWriter, r *http.Request) {
+}
+
+func (invoiceHandler *InvoiceHandler) HandleInvoiceStatues(w http.ResponseWriter, r *http.Request){
+	invoiceStatus, err := invoiceHandler.invoiceStore.GetInvoiceStatuses()
+	if err != nil {
+		fmt.Println(err)
+		http.Error(w,"Failed to fetch invoice status",http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type","application/json")
+	json.NewEncoder(w).Encode(invoiceStatus)
 }

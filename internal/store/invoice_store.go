@@ -5,6 +5,7 @@ import "database/sql"
 
 type InvoiceTax struct {
 	Id int64 `json:"id"`
+	Name int64 `json:"name"`
 	Label string `json:"label"`
 	TaxPercentage int64 `json:"tax_percentage"`
 }
@@ -15,8 +16,8 @@ type InvoiceRow struct {
 	Item string `json:"item"`
 	Description string `json:"description"`
 	HSNCode string `json:"hsn_code"`
-	Quantity string `json:"quantity"`
-	Price string `json:"price"`
+	Quantity int64 `json:"quantity"`
+	Price int64 `json:"price"`
 	Unit string `json:"unit"`
 	InvoiceRowOrder int `json:"invoice_row_order"`
 	InvoiceTaxes []InvoiceTax `json:"invoice_taxes"`
@@ -73,6 +74,7 @@ type InvoiceStore interface {
 	CreateInvoice(invoice *Invoice) (*Invoice, error)
 	GetInvoiceByID(id int64) (*Invoice, error)
 	GetInvoices() (*[]Invoice, error)
+	GetInvoiceStatuses() (*[]InvoiceStatus, error)
 }
 
 type PostgresInvoiceStore struct {
@@ -95,4 +97,22 @@ func (pg *PostgresInvoiceStore) GetInvoiceByID(id int64) (*Invoice, error) {
 
 func (pg *PostgresInvoiceStore) GetInvoices() (*[]Invoice, error) {
 	return nil,nil
+}
+
+func (pg *PostgresInvoiceStore) GetInvoiceStatuses() (*[]InvoiceStatus, error) {
+	const query = `SELECT id, name, label FROM invoice_statuses LIMIT 10`
+	rows, err :=pg.db.Query(query)
+	if err != nil {
+		return nil, err
+	}
+	var invoiceStatuses []InvoiceStatus = make([]InvoiceStatus, 0, 10)
+	for rows.Next() {
+		var invoiceStatus = InvoiceStatus{}
+		err = rows.Scan(&invoiceStatus.Id, &invoiceStatus.Name, &invoiceStatus.Label)
+		if err != nil {
+			return nil, err
+		}
+		invoiceStatuses = append(invoiceStatuses, invoiceStatus)
+	}
+	return &invoiceStatuses, nil
 }
