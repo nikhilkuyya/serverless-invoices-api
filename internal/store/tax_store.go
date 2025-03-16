@@ -4,6 +4,7 @@ import "database/sql"
 
 type Tax struct {
 	Id int64 `json:"id"`
+	Name string `json:"name"`
 	Label string `json:"label"`
 	TaxPercentage int64 `json:"tax_percentage"`
 }
@@ -31,9 +32,9 @@ func (pg *PostgresTaxStore) CreateTax(tax *Tax) (*Tax,error) {
 		return nil, err
 	}
 
-	const query = `INSERT INTO taxes(label, tax_percentage) VALUES ($1, $2) RETURNING id`
+	const query = `INSERT INTO taxes(name, label, tax_percentage) VALUES ($1, $2, $3) RETURNING id`
 
-	err = tx.QueryRow(query,&tax.Label, &tax.TaxPercentage).Scan(&tax.Id)
+	err = tx.QueryRow(query, &tax.Name, &tax.Label, &tax.TaxPercentage).Scan(&tax.Id)
 
 	if err != nil {
 		return nil, err
@@ -47,8 +48,9 @@ func (pg *PostgresTaxStore) CreateTax(tax *Tax) (*Tax,error) {
 
 func (pg *PostgresTaxStore) GetTaxByID(id  int64) (*Tax, error) {
 	var tax = Tax{}
-	const query = `SELECT id, label, tax_percentage FROM taxes WHERE id = $1`;
-	err := pg.db.QueryRow(query,id).Scan(&tax.Id,&tax.Label, &tax.TaxPercentage);
+	const query = `SELECT id,name, label, tax_percentage FROM taxes WHERE id = $1`;
+	err := pg.db.QueryRow(query,id).Scan(&tax.Id, &tax.Name, &tax.Label, &tax.TaxPercentage);
+
 	if err == sql.ErrNoRows {
 		return nil, nil
 	}
@@ -61,7 +63,7 @@ func (pg *PostgresTaxStore) GetTaxByID(id  int64) (*Tax, error) {
 }
 
 func (pg *PostgresTaxStore) GetTaxes() (*[]Tax, error) {
-	const query = `SELECT id, label, tax_percentage FROM taxes LIMIT 100`
+	const query = `SELECT id, name, label, tax_percentage FROM taxes LIMIT 100`
 
 	rows, err := pg.db.Query(query)
 
@@ -74,7 +76,7 @@ func (pg *PostgresTaxStore) GetTaxes() (*[]Tax, error) {
 
 	for rows.Next() {
 		var tax = Tax{}
-		err = rows.Scan(&tax.Id, &tax.Label, &tax.TaxPercentage)
+		err = rows.Scan(&tax.Id, &tax.Name, &tax.Label, &tax.TaxPercentage)
 
 		if err != nil {
 			return nil, err
