@@ -1,0 +1,521 @@
+{
+	"info": {
+		"_postman_id": "6a657dc0-bdb4-492e-a879-90c0402cca7e",
+		"name": "Invoices-App-Go",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33353510"
+	},
+	"item": [
+		{
+			"name": "Create-New-BankAccount",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"account_nick_name\": \"pay account\",\n    \"bank_name\": \"YESBANK\",\n    \"bank_account_number\": \"1234\",\n    \"bank_ifsc_code\": \"YES0001\",\n    \"bank_description\": \"this is we use for purpose\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/bank-account",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bank-account"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create-Client",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"company_name\":\"Lorem Client\",\n    \"company_gstin\": \"1123\",\n    \"company_address\": \"Hello 123\",\n    \"company_city\": \"Hyd\",\n    \"company_postalcode\":\"123\",\n    \"company_state\":\"Tel\",\n    \"company_email\":\"lorem@mail.com\",\n    \"company_bank_account_id\": 1,\n    \"company_country\":\"INDIA\"    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/client",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"client"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create-New-BankAccount2",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"account_nick_name\": \"lend account\",\n    \"bank_name\": \"Axis\",\n    \"bank_account_number\": \"900\",\n    \"bank_ifsc_code\": \"AXIS001\",\n    \"bank_description\": \"saving account\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/bank-account",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bank-account"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get-AllAccounts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost:8080/bank-account/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bank-account",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get-AllClients",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost:8080/client/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"client",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get-ClientByID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost:8080/client/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"client",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get-BankAccount-1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost:8080/bank-account/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bank-account",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get-BankAccount2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost:8080/bank-account/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bank-account",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get-AllTeam",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/team/list",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"team",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create-Team",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"company_name\": \"Example Corp\",\n\t\"company_gstin\": \"29ABCDE1234F1Z5\",\n\t\"company_address\": \"123 Main Street\",\n\t\"company_postal_code\": \"560001\",\n\t\"company_city\": \"Bangalore\",\n\t\"company_state\": \"Karnataka\",\n\t\"company_country\": \"India\",\n\t\"website\": \"https://example.com\",\n\t\"contact_email\": \"contact@example.com\",\n\t\"contact_phone\": \"+91-1234567890\",\n\t\"currency\": \"INR\",\n\t\"invoice_due_days\": 30,\n\t\"invoice_late_fee\": 10,\n\t\"logo_url\": \"https://example.com/logo.png\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/team",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"team"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get-Team-ID-1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/team/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"team",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Tax",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"CGST\",\n    \"label\": \"CGST\",\n    \"tax_percentage\": 6\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/tax",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"tax"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get-AllTax",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/tax/list",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"tax",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Tax By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/tax/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"tax",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddTax-2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"SGST\",\n    \"label\": \"SGST\",\n    \"tax_percentage\": 6\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/tax",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"tax"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create-Client2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"company_name\":\"RMP NEW Client\",\n    \"company_gstin\": \"0001231213\",\n    \"company_address\": \"Amberpet 123\",\n    \"company_city\": \"Hyd\",\n    \"company_postalcode\":\"123\",\n    \"company_state\":\"Tel\",\n    \"company_email\":\"lorem@mail.com\",\n    \"company_bank_account_id\": 2,\n    \"company_country\":\"MALAYASIA\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/client",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"client"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add-Invoice",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"invoice_number\": \"INV-001\",\n    \"status_id\": 1,\n    \"team_id\": 1,\n    \"bank_account_id\": 1,\n    \"client_id\": 1,\n    \"consignee_id\": 1,\n    \"notes\": \"Hello FEM\",\n    \"total\": 1120,\n    \"issued_at\":\"2024-01-01\",\n    \"rows\": [\n        {\n            \"serial_no\": \"1\",\n            \"item\": \"Kraft Corrugated Boxes\",\n            \"description\": \"Test Sample\",\n            \"hsn_code\": \"4819\",\n            \"quantity\": 1,\n            \"price\": 500,\n            \"unit\": \"nos\",\n            \"invoice_row_order\": 1            \n        },\n        {\n            \"serial_no\": \"2\",\n            \"item\": \"Kraft Corrugated Boxes\",\n            \"description\": \"Packaging\",\n            \"hsn_code\": \"4819\",\n            \"quantity\": 2,\n            \"price\": 250,\n            \"unit\": \"nos\",\n            \"invoice_row_order\": 2\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/invoice",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"invoice"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "InvoiceStatuses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/invoice-status/all",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"invoice-status",
+						"all"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

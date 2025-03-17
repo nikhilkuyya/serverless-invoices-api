@@ -5,7 +5,7 @@ import (
 	"github.com/nikhilkuyya/invoice-go-app/internal/app"
 )
 
-func SetupRoutes(app *app.Application) (*chi.Mux){
+func SetupRoutes(app *app.Application) (*chi.Mux) {
 	r := chi.NewRouter()
 	r.Get("/health", app.HealthCheck)
 	r.Get("/bank-account/{id}",app.BankAccountHandler.HandleGetBankAccountByID)
@@ -18,13 +18,13 @@ func SetupRoutes(app *app.Application) (*chi.Mux){
 
 	r.Get("/team/{id}",app.TeamHandler.HandleGetTeamByID)
 	r.Post("/team",app.TeamHandler.HandleCreateTeam)
-	r.Get("/team",app.TeamHandler.HandleGetTeams)
+	r.Get("/team/list",app.TeamHandler.HandleGetTeams)
 
 	r.Get("/tax/{id}",app.TaxHandler.HandleGetTaxByID)
 	r.Get("/tax", app.TaxHandler.HandleGetTaxes)
-	r.Post("/tax",app.TaxHandler.HandleCreateTax)
+	r.Post("/tax/list",app.TaxHandler.HandleCreateTax)
 
 	r.Post("/invoice",app.InvoiceHandler.HandleCreateInovice)
-	r.Get("/invoice-status", app.InvoiceHandler.HandleInvoiceStatues)
+	r.Get("/invoice-status/all", app.InvoiceHandler.HandleInvoiceStatues)
 	return r
 }
